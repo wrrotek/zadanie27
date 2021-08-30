@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista zadań</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="/style.css"/>
+</head>
+<body>
+
+<div class="content">
+
+    <h2>Osoby</h2>
+
+    <div class="list-group">
+        <button type="button"
+                class="list-group-item list-group-item-action d-flex justify-content-between align-items-center"
+                th:each="person: ${people}">
+            <span th:text="|${person.name} ${person.surname}, data urodzenia: ${person.birthday}, mail: ${person.mail},
+           newsletter: ${person.isSubscribed}|"></span>
+        </button>
+
+    </div>
+
+    <h2 class="mt-4">Dodaj nową osobę</h2>
+
+    <form action="/add" method="post" th:object="${newPerson}">
+        <div class="form-group">
+            <input type="text" class="form-control" th:field="*{name}" placeholder="Imię"/>
+        </div>
+        <div class="form-group">
+            <input type="text" class="form-control" th:field="*{surname}" placeholder="Nazwisko"/>
+        </div>
+        <div class="form-group">
+            <input type="date" class="form-control" th:field="*{birthday}" placeholder="Data urodzenia"/>
+        </div>
+        <div class="form-group">
+            <input type="text" class="form-control" th:field="*{mail}" placeholder="mail"/>
+        </div>
+
+        <input type="submit" value="Dodaj!" class="btn btn-primary"/>
+    </form>
+</div>
+
+</body>
+</html>
